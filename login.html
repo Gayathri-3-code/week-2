@@ -3,135 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forms</title>
-    <style>
-        body{
-            display :flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            background-color: aqua;
-        }
-        table{
-            margin-top: 20px;
-            border-collapse: collapse;
-            width: 300px;
-            display: none;
-        }
-        td{
-            padding: 10px;
-        }
-        button{
-            margin: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            background-color: bisque(5,72,215);
-        }
-        input{
-            width: 100px;
-            padding: 10px;
-            margin: 5px 0;
-        }
-    </style>
+    <title>Jquery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
-        <button onclick="showForm('login')">Login</button>
-        <button onclick="showForm('Register')">Register</button>
+    <div class="container">
+        <div id="myCarousel" class="carousel slide">
+            <ol class="carousel-indicators">
+                <li class="item1 active"></li>
+                <li class="item2"></li>
+                <li class="item3"></li>
+            </ol>
+            <div class="carousel-inner" role="listitem">
+            <div class="item active">
+            <img src="../img-1.jpg"
+            alt="image1" width="50%" height="50%">
+            <div class="carousel-caption"><h3>shinchan</h3></div>
+            </div>
+
+            <div class="item">
+            <img src="../img-2.jpg"
+            alt="image1" width="50%" height="50%">
+            <div class="carousel-caption"><h3>Sasuke</h3></div>
+            </div>
+
+            <div class="item">
+            <img src="../img-3.jpg"
+            alt="image1" width="50%" height="50%">
+            <div class="carousel-caption"><h3>shinchan</h3></div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">prev</span>        
+        </a>
+
+        <a class="right carousel-control" href="#myCarousel" role="button">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">next</span>        
+        </a>
+
+        <a class="right carousel-control" href="#myCarousel" role="button">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">next</span>        
+        </a>
+        </div>
+
     </div>
-    <table id="formTable">
-        <tbody>
-            <tr id="loginRow" style="display: none;">
-            <td>
-                <h2>Login</h2>
-                <form onsubmit="return validateLogin()">
-                Username:<input type="text" id="loginUsername" placeholder="Username" required>
-                Password:<input type="password" id="loginPassword" placeholder="Password" required>
-                <button type="submit"> Submit</button>
-                </form>
-            </td>
-           </tr>
-           <tr id="registerRow" style="display: none;">
-            <td>
-                <h2>Register</h2>
-                <form onsubmit="return validateRegister()">
-                  name:<input type="text" id="registername" placeholder="name" required>
-                  Phone:<input type="number" id="registerPhone" placeholder="Phone" required>
-                  Email:<input type="email" id="registerEmail" placeholder="Email" required>
-                  Gender:<input type="radio" name="gender" value="male">Male
-                         <input type="radio" name="gender" value="female">Female<br/>
-                  DOB:<input type="date" id="registerDOB" placeholder="Date of Birth" required>
-                  Password:<input type="password" id="loginPassword" placeholder="Password" required>
-                  <button type="submit"> Submit</button>
-                </form>
-            </td>
-           </tr>
-        </tbody>
-    </table>
     <script>
-        function showForm(formtype){
-            document.getElementById('loginRow').style.display='none';
-            document.getElementById('registerRow').style.display='none';
-            document.getElementById('formTable').style.display='table';
-
-            if(formtype=='login'){
-                document.getElementById('loginRow').style.display='table-row';
-            } else{
-                document.getElementById('registerRow').style.display='table-row';
-            }
-        }
-
-        function validateLogin(){
-            const Username=document.getElementById('loginUsername').value;
-            const Password=document.getElementById('loginPassword').value; 
-            
-            if(Username=='' || Password==''){
-                alert('Please fill in all fields.');
-                return false;
-            }
-            alert('Login successful');
-            return false;
-        }
-
-        function validateRegister(){
-            const name=document.getElementById('registername').value;
-            const Phone=document.getElementById('registerPhone').value;
-            const Email=document.getElementById('registerEmail').value;
-            const DOB=document.getElementById('registerDOB').value;
-            const Password=document.getElementById('registerPassword').value;
-
-            if(name=='' || Phone=='' || Email==''||DOB=='' || Password==''){
-                alert('Please fill in all fields');
-                return false;
-            }
-            for(x in name){
-                ch=name.charCodeAt(x);
-                if(ch<65||ch>90 && ch<97 || ch>122) {
-                        alert("Invalid Name");
-                        return false;
-                    }
-            }
-
-            const phonePattern=/^[0-9]{10}$/;
-            if(!Phone.match(phonePattern)){
-                alert('Please enter valid 10-digit phone number.');
-                return false;
-            }
-
-            const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if(!Email.match(emailPattern)){
-                alert('Please enter a valid address');
-                return false;
-            }
-            var pwd1=Password.length;
-            if(pwd>8){
-                alert('Password should not exceed 8 digits');
-                return false;
-            }
-
-            alert('Registration completed');
-            return false;
-        }
+        $(document).ready(function(){
+        $("#myCarousel").carousel();
+        $(".item1").click(function(){
+        $("#myCarousel").carousel(0);
+        })
+        $(".item1").click(function(){
+        $("#myCarousel").carousel(1);
+        })
+        $(".item1").click(function(){
+        $("#myCarousel").carousel(2);
+        })
+        $(".left").click(function(){
+        $("#myCarousel").carousel("prev");
+        })
+        $(".right").click(function(){
+        $("#myCarousel").carousel("next");
+        })
+        })
     </script>
+    
 </body>
 </html>
